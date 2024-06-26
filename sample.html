@@ -36,41 +36,156 @@ html::-webkit-scrollbar-thumb{
     background: var(--white);
     border-radius: 50px;
 }
-.title{
-    font-size: 25px;
-    color: var(--blue);
-    margin-bottom:15px ;
-}
-.btn{
-    margin-top: 10px;
-    display: inline-block;
-    padding: 7px 20px;
-    border-radius: 5px;
-    background: var(--blue);
-    color: var(--white);
-    font-size:17px;
-    box-shadow: var(--box-shadow);
-}
-.btn:hover{
-    background: var(--black);
-}
 .container{
-    padding:100px 9%;
+    padding: 200px 9%;
     background:linear-gradient(45deg,#500472 ,rgb(1, 209, 189));
     display:flex;
 }
-.video1{
-    align-items: center;
+.content{
+    display: flex;
 }
-    </style>
+.card {
+    max-width: 400px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 20px auto;
+  }
+
+  .card video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .card .custom-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .card .custom-controls button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+  .card .custom-controls button:focus {
+    outline: none;
+  }
+
+  .card .custom-controls button:hover {
+    background-color:black;
+  }
+
+  .card .card-content {
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 1rem;
+    color: #666;
+  }
+
+  /* Hide download button */
+  .card video::-webkit-media-controls-enclosure {
+    display: none;
+  }
+  @media (max-width: 100px) {
+    .container {
+      padding: 10px;
+    }
+
+    .card {
+      padding: 15px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card .custom-controls button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+<link rel="stylesheet" href="script.js">
 </head>
 <body>
     <div class="container">
-        <div class="works">
-            <div class="video1">
-                <video src="/asset/astro flag.mp4"></video>
-            </div>  
-        </div>
-    </div>
+        <div class="card">
+            <video id="videoPlayer1" class="videoPlayer" controls controlsList="nodownload">
+              <source src="asset/astro flag.mp4" type="video/mp4">            </video>
+            <div class="custom-controls">
+              <button class="playPauseBtn" data-player="videoPlayer1">Play</button>
+            </div>
+            <div class="card-content">
+              <h3>Astronaut animation.</h3>
+              <p>For independance day.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <video id="videoPlayer2" class="videoPlayer" controls controlsList="nodownload">
+              <source src="asset/man choc.mp4" type="video/mp4">
+            </video>
+            <div class="custom-controls">
+              <button class="playPauseBtn" data-player="videoPlayer2">Play</button>
+            </div>
+            <div class="card-content">
+              <h3>Man offering cake.</h3>
+              <p>For birthday wishes.</p>
+            </div>
+          </div>
+          
+          <div class="card">
+            <video id="videoPlayer3" class="videoPlayer" controls controlsList="nodownload">
+              <source src="asset/shiv edit.mp4" type="video/mp4">
+            </video>
+            <div class="custom-controls">
+              <button class="playPauseBtn" data-player="videoPlayer3">Play</button>
+            </div>
+            <div class="card-content">
+              <h3>Lord shiva animation.</h3>
+              <p>Worshipping purposes.</p>
+            </div>
+          </div>
+    <script>
+         const videoPlayers = document.querySelectorAll('.videoPlayer');
+  const playPauseBtns = document.querySelectorAll('.playPauseBtn');
+
+  // Add event listener to each playPauseBtn
+  playPauseBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const videoId = this.getAttribute('data-player');
+      const video = document.getElementById(videoId);
+
+      if (video.paused) {
+        video.play();
+        this.textContent = 'Pause';
+      } else {
+        video.pause();
+        this.textContent = 'Play';
+      }
+    });
+  });
+    </script>
 </body>
 </html>
